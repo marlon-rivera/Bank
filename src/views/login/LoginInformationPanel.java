@@ -1,4 +1,4 @@
-package login;
+package views.login;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import util.FileManager;
+import util.TextPrompt;
 
 public class LoginInformationPanel extends JPanel {
 
@@ -28,7 +29,7 @@ public class LoginInformationPanel extends JPanel {
 		setLayout(new GridBagLayout());
 		setOpaque(false);
 		gbc = new GridBagConstraints();
-		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setBorder(BorderFactory.createLineBorder(Color.decode("#857991")));
 		initComponents();
 	}
 	
@@ -39,9 +40,13 @@ public class LoginInformationPanel extends JPanel {
 		username = new JLabel("Nombre de usuario:");
 		username.setFont(new Font("Arial", Font.PLAIN, 16));
 		username.setForeground(Color.BLACK);
+		username.setBackground(Color.PINK);
 		usernameTxt = new TextFieldRound(15);
-		password = new JLabel("Contrasena");
+		new TextPrompt("Ingrese aqui su usuario", usernameTxt);
+		password = new JLabel("Contrasena:");
+		password.setFont(new Font("Arial", Font.PLAIN, 16));
 		passwordTxt = new TextFieldRound(15);
+		new TextPrompt("Ingrese aqui su contrasenia", passwordTxt);
 		labelUserIcon.setOpaque(false);
 		Insets insets = new Insets(10, 40, 0, 40);
 		gbc.insets = insets;
@@ -56,7 +61,7 @@ public class LoginInformationPanel extends JPanel {
 		gbc.gridy = 3;
 		add(password, gbc);
 		gbc.gridy = 4;
-		insets = new Insets(0, 40, 90, 40);
+		insets = new Insets(0, 40, 170, 40);
 		gbc.insets = insets;
 		add(passwordTxt, gbc);
 	}

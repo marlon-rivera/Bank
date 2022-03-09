@@ -1,4 +1,4 @@
-package login;
+package views.login;
 
 import java.awt.Graphics;
 import java.awt.Shape;

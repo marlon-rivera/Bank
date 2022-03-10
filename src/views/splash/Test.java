@@ -3,7 +3,11 @@ package views.splash;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,9 +22,8 @@ public class Test extends JFrame implements ActionListener{
 		JPanel panel = new JPanel();
 		panel.setSize(400,400);
 		ProgressBar bar = new ProgressBar(10000);
-		BankButton button1 = new BankButton("XXX", this, "X", 100, 100, Color.PINK, Color.GREEN, false);
+		BankButton button1 = new BankButton("X", "X", this, new Color(0, 0, 0, 80), new Color(0,0,0,0), 50, 50);
 		new Thread(bar).start();
-		//panel.add(bar);
 		panel.add(button1);
 		add(panel); 
 	}

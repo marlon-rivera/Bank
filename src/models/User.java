@@ -5,14 +5,16 @@ import java.time.LocalDate;
 public class User {
 
 	private String name;
+	private String lastName;
 	private LocalDate birthDate;
 	private long id;
 	private String email;
 	private long numberPhone;
 	private Gender gender;
 
-	public User(String name, LocalDate birthDate, long id, String email, long numberPhone, Gender gender) {
+	public User(String name, String lastName, LocalDate birthDate, long id, String email, long numberPhone, Gender gender) {
 		this.name = name;
+		this.lastName = lastName;
 		this.birthDate = birthDate;
 		this.id = id;
 		this.email = email;
@@ -22,6 +24,14 @@ public class User {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public void setName(String name) {

@@ -24,9 +24,10 @@ public class Constants extends Properties {
 	//Images
 	
 	public static final String ICON_LOGIN = "ICON_LOGIN";
+	public static final String ICON_BANK = "ICON_BANK";
 	public static final String BAKCGROUND_LOGIN = "BAKCGROUND_LOGIN";
 	
-	//Colors
+	//Colors BUTTONS
 	
 	public static final Color COLOR_BACKGROUND_P = new Color(0, 0, 0, 80);
 	public static final Color COLOR_BACKGROUND_S = Color.GRAY;
@@ -44,14 +45,33 @@ public class Constants extends Properties {
 	public static final String TEXT_LANGUAGE = "TEXT_LANGUAGE";
 	public static final Font FONT_LABEL = new Font("Arial", Font.PLAIN, 16);
 	
+	//Panel Info Registration
+	
+	public static final String TEXT_NAME = "TEXT_NAME";
+	public static final String PLACE_HOLDER_NAME="PLACE_HOLDER_NAME";
+	public static final String TEXT_LAST_NAME = "TEXT_LAST_NAME";
+	public static final String PLACE_HOLDER_LAST_NAME = "PLACE_HOLDER_LAST_NAME";
+	public static final String TEXT_DATE_OF_BIRTH = "TEXT_DATE_OF_BIRTH";
+	public static final String PLACE_HOLDER_DATE_OF_BIRTH = "PLACE_HOLDER_DATE_OF_BIRTH";
+	public static final String TEXT_ID_NUMBER = "TEXT_ID_NUMBER";
+	public static final String PLACE_HOLDER_ID_NUMBER = "PLACE_HOLDER_ID_NUMBER";
+	public static final String TEXT_EMAIL = "TEXT_EMAIL";
+	public static final String PLACE_HOLDER_EMAIL = "PLACE_HOLDER_EMAIL";
+	public static final String TEXT_NUMBER_PHONE = "TEXT_NUMBER_PHONE";
+	public static final String PLACE_HOLDER_NUMBER_PHONE = "PLACE_HOLDER_NUMBER_PHONE";
+	public static final String TEXT_GENDER = "TEXT_GENDER";
+	public static final String TEXT_CREATE_YOUT_ACCOUNT = "TEXT_CREATE_YOUT_ACCOUNT";
+	public static final String BUTTON_CREATE_YOUR_ACCOUNT = "TEXT_BUTTON_CREATE_YOUR_ACCOUNT";
+	public static final String COMMAND_BUTTON_CREATE_YOUR_ACCOUNT = "COMMAND_BUTTON_CREATE_YOUR_ACCOUNT";
 	
 	//Main Frame
 	
 	public static final String BUTTON_CROSS ="BUTTON_CROSS";
+	public static final String COMMAND_BUTTON_CROSS = "COMMAND_BUTTON_CROSS"; 
 	
 	public Constants(String path) {
 		try {
-			load(new FileReader(PATH_LENGUAGE_EN));
+			load(new FileReader(PATH_LENGUAGE_ES));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

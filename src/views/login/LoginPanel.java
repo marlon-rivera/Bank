@@ -19,7 +19,7 @@ public class LoginPanel extends JPanel {
 	private GridBagConstraints gbc;
 	private LoginInformationPanel loginInformationPanel;
 	private JLabel labelBackground;
-	
+	private Image imageScaled;
 	
 	public LoginPanel(ActionListener listener) {
 		this.setLayout(new GridBagLayout());
@@ -29,9 +29,8 @@ public class LoginPanel extends JPanel {
 	}
 	
 	private void initComponents(ActionListener listener) {
-		System.out.println(Constants.createInstance().getProperty(Constants.BAKCGROUND_LOGIN));
 		Image image = FileManager.loadImage(Constants.createInstance().getProperty(Constants.BAKCGROUND_LOGIN));
-		Image imageScaled = image.getScaledInstance(690-6, 390-6, Image.SCALE_SMOOTH);
+		imageScaled = image.getScaledInstance(684, 384, Image.SCALE_SMOOTH);
 		labelBackground = new JLabel(new ImageIcon(imageScaled));
 		loginInformationPanel = new LoginInformationPanel(listener);
 		Insets insets = new Insets(0,20,0,0);
@@ -44,6 +43,13 @@ public class LoginPanel extends JPanel {
 		gbc.insets = insets;
 		gbc.anchor = GridBagConstraints.CENTER;
 		this.add(labelBackground, gbc);
-		
+	}
+	
+	public int getWidthBackground() {
+		return imageScaled.getWidth(this);  
+	}
+	
+	public int getHeightBackground() {
+		return imageScaled.getHeight(this);
 	}
 }

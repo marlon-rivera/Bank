@@ -28,13 +28,12 @@ public class LoginInformationPanel extends JPanel {
 	private JLabel password;
 	private TextFieldRound passwordTxt;
 	private BankButton buttonEnter;
-	//private BankButton buttonForgotPassword;
 	private BankButton buttonRegister;
 	private JLabel language;
 	private JComboBox<String> comboLanguage;
-	
+
 	private GridBagConstraints gbc;
-	
+
 	public LoginInformationPanel(ActionListener listener) {
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
@@ -42,7 +41,7 @@ public class LoginInformationPanel extends JPanel {
 		this.setBorder(BorderFactory.createLineBorder(Color.decode("#857991")));
 		initComponents(listener);
 	}
-	
+
 	private void initComponents(ActionListener listener) {
 		Image image = FileManager.loadImage(Constants.createInstance().getProperty(Constants.ICON_LOGIN));
 		Image imageScaled = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
@@ -58,13 +57,16 @@ public class LoginInformationPanel extends JPanel {
 		passwordTxt = new TextFieldRound(15);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_PASSWORD), passwordTxt);
 		labelUserIcon.setOpaque(false);
-		buttonEnter = new BankButton(Constants.createInstance().getProperty(Constants.BUTTON_ENTER), Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_ENTER), listener, Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 100, 25);
-		//buttonForgotPassword = new BankButton(Constants.createInstance().getProperty(""), Constants.createInstance().getProperty(""), listener, Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 100, 100);
-		buttonRegister = new BankButton(Constants.createInstance().getProperty(Constants.BUTTON_REGISTER), Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_REGISTER), listener, Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 170, 30);
+		buttonEnter = new BankButton(Constants.createInstance().getProperty(Constants.BUTTON_ENTER),
+				Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_ENTER), listener,
+				Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 100, 25);
+		buttonRegister = new BankButton(Constants.createInstance().getProperty(Constants.BUTTON_REGISTER),
+				Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_REGISTER), listener,
+				Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 170, 30);
 		language = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_LANGUAGE));
 		language.setOpaque(false);
 		language.setFont(Constants.FONT_LABEL);
-		language.setForeground(Color.WHITE);
+		language.setForeground(new Color(0,0,0,0));
 		initComboLenguage();
 		Insets insets = new Insets(10, 40, 0, 40);
 		gbc.insets = insets;
@@ -100,7 +102,7 @@ public class LoginInformationPanel extends JPanel {
 		gbc.gridy = 7;
 		this.add(language, gbc);
 	}
-	
+
 	private void initComboLenguage() {
 		comboLanguage = new JComboBox<>();
 		comboLanguage.setOpaque(false);

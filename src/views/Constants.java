@@ -64,7 +64,27 @@ public class Constants extends Properties {
 	public static final String BUTTON_CREATE_YOUR_ACCOUNT = "TEXT_BUTTON_CREATE_YOUR_ACCOUNT";
 	public static final String COMMAND_BUTTON_CREATE_YOUR_ACCOUNT = "COMMAND_BUTTON_CREATE_YOUR_ACCOUNT";
 	
-	//Main Frame
+	//Panel Main
+	
+	public static final String ICON_DEPOSIT = "ICON_DEPOSIT";              
+	public static final String ICON_TRANSFER = "ICON_TRANSFER";
+	public static final String ICON_WITHDRAW = "ICON_WITHDRAW";
+	public static final String COMMAND_BUTTON_TRANSFER = "COMMAND_BUTTON_TRANSFER";
+	public static final String COMMAND_BUTTON_DEPOSIT = "COMMAND_BUTTON_DEPOSIT";
+	public static final String COMMAND_BUTTON_WITHDRAW = "COMMAND_BUTTON_WITHDRAW";
+	public static final String TEXT_TRANSFER = "TEXT_TRANSFER"; 
+	public static final String TEXT_DEPOSIT = "TEXT_DEPOSIT"; 
+	public static final String TEXT_WITHDRAW = "TEXT_WITHDRAW";
+	
+	//Panel Info Account
+	
+	public static final String TEXT_NUMBER_ACCOUNT = "TEXT_NUMBER_ACCOUNT";
+	public static final String TEXT_MONEY = "TEXT_MONEY";
+	public static final String TEXT_USER = "TEXT_USER";
+	public static final String DEFAULT_PHOTO = "DEFAULT_PHOTO";
+	public static final String TEXT_AGE = "TEXT_AGE";
+	
+	//Main Frame 
 	
 	public static final String BUTTON_CROSS ="BUTTON_CROSS";
 	public static final String COMMAND_BUTTON_CROSS = "COMMAND_BUTTON_CROSS"; 

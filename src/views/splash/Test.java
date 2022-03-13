@@ -15,22 +15,39 @@ import views.BankButton;
 
 public class Test extends JFrame implements ActionListener{
 
+	private ProgressBarCircle bar;
+	
 	public Test() {
-		setSize(1000, 150);
+		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-		panel.setSize(400,400);
-		ProgressBar bar = new ProgressBar(10000);
-		BankButton button1 = new BankButton("X", "X", this, new Color(0, 0, 0, 80), new Color(0,0,0,0), 50, 50);
-		new Thread(bar).start();
-		panel.add(button1);
+		JButton button = new JButton("Iniciar");
+		button.addActionListener(this);
+		bar = new ProgressBarCircle();
+		panel.add(button);
+		panel.add(bar);
 		add(panel); 
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				for (int i = 0; i < 100; i++) {
+					bar.updateProgress(i);
+					bar.repaint();
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+				}
+				
+			}
+		}).start();;
 		
 	}
 	

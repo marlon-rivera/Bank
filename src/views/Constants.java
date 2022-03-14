@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Constants extends Properties {
+public class Constants extends Properties{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -84,10 +84,31 @@ public class Constants extends Properties {
 	public static final String DEFAULT_PHOTO = "DEFAULT_PHOTO";
 	public static final String TEXT_AGE = "TEXT_AGE";
 	
+	//Main Panel
+	
+	public static final String TEXT_MAIN_MENU = "TEXT_MAIN_MENU";
+	
+	//TransferPanel
+	
+	public static final String TEXT_TARGET_ACCOUNT= "TEXT_TARGET_ACCOUNT";
+	public static final String TEXT_AMOUNT = "TEXT_AMOUNT";
+	public static final String BUTTON_MAKE_TRANSFER = "BUTTON_MAKE_TRANSFER";
+	public static final String COMMAND_BUTTON_MAKE_TRANSFER = "COMMAND_BUTTON_MAKE_TRANSFER";
+	public static final String COMMAND_BUTTON_BACK_OPTIONS = "COMMAND_BUTTON_BACK_OPTIONS";
+	public static final String PLACE_HOLDER_AMOUNT = "PLACE_HOLDER_AMOUNT";
+	public static final String PLACE_HOLDER_TARGE_ACCOUNT = "PLACE_HOLDER_TARGE_ACCOUNT";
+	
+	//WithdrawPanel
+	
+	public static final String COMMAND_BUTTON_MAKE_WITHDRAW = "COMMAND_BUTTON_MAKE_WITHDRAW";
+	
 	//Main Frame 
 	
 	public static final String BUTTON_CROSS ="BUTTON_CROSS";
 	public static final String COMMAND_BUTTON_CROSS = "COMMAND_BUTTON_CROSS"; 
+	public static final String BUTTON_BACK = "BUTTON_BACK";
+	public static final String COMMAND_BUTTON_BACK = "COMMAND_BUTTON_BACK";
+	
 	
 	public Constants(String path) {
 		try {

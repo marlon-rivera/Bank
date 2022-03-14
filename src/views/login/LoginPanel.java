@@ -52,4 +52,9 @@ public class LoginPanel extends JPanel {
 	public int getHeightBackground() {
 		return imageScaled.getHeight(this);
 	}
+	
+	public String getLenguage() {
+		return loginInformationPanel.getLenguage();
+	}
+	
 }

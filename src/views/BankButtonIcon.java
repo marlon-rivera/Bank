@@ -10,14 +10,18 @@ import javax.swing.JButton;
 
 public class BankButtonIcon extends JButton {
 
-	public BankButtonIcon(ImageIcon icon, ActionListener listener, String command, int width, int heigth, boolean isScaled) {
-		if(isScaled) {
+	private static final long serialVersionUID = 1L;
+	
+	public BankButtonIcon(ImageIcon icon, ActionListener listener, String command, int width, int heigth,
+			boolean isScaled) {
+		if (isScaled) {
 			ImageIcon iconScaled = new ImageIcon(icon.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH));
 			this.setIcon(iconScaled);
-		}else {
+		} else {
 			this.setIcon(icon);
 		}
-		this.setBackground(new Color(0,0,0,0));
+		this.setOpaque(false);
+		this.setBackground(new Color(0, 0, 0, 0));
 		this.addActionListener(listener);
 		this.setActionCommand(command);
 		this.setBorderPainted(false);

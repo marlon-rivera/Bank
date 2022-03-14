@@ -33,6 +33,8 @@ public class BankButton extends JButton {
 		this.setOpaque(false);
 		this.setFocusPainted(false);
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.setActionCommand(command);
+		this.addActionListener(listener);
 		this.addMouseListener(new MouseAdapter() {
 
 			@Override

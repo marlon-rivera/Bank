@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import views.Constants;
 
 public class PanelPhoto extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private ImageIcon imagePhoto;
 
 	public PanelPhoto() {

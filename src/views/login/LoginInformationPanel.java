@@ -17,16 +17,17 @@ import util.FileManager;
 import util.TextPrompt;
 import views.BankButton;
 import views.Constants;
+import views.PasswordTextRound;
 import views.TextFieldRound;
 
-public class LoginInformationPanel extends JPanel {
+public class LoginInformationPanel extends JPanel implements Runnable{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelUserIcon;
 	private JLabel username;
 	private TextFieldRound usernameTxt;
 	private JLabel password;
-	private TextFieldRound passwordTxt;
+	private PasswordTextRound passwordTxt;
 	private BankButton buttonEnter;
 	private BankButton buttonRegister;
 	private JLabel language;
@@ -54,7 +55,7 @@ public class LoginInformationPanel extends JPanel {
 		password = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_PASSWORD));
 		password.setFont(Constants.FONT_LABEL);
 		password.setForeground(Color.BLACK);
-		passwordTxt = new TextFieldRound(15);
+		passwordTxt = new PasswordTextRound(15);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_PASSWORD), passwordTxt);
 		labelUserIcon.setOpaque(false);
 		buttonEnter = new BankButton(Constants.createInstance().getProperty(Constants.BUTTON_ENTER),
@@ -67,7 +68,7 @@ public class LoginInformationPanel extends JPanel {
 		language.setOpaque(false);
 		language.setFont(Constants.FONT_LABEL);
 		language.setForeground(new Color(0,0,0,0));
-		initComboLenguage();
+		initComboLenguage(listener);
 		Insets insets = new Insets(10, 40, 0, 40);
 		gbc.insets = insets;
 		this.add(labelUserIcon, gbc);
@@ -103,12 +104,28 @@ public class LoginInformationPanel extends JPanel {
 		this.add(language, gbc);
 	}
 
-	private void initComboLenguage() {
+	private void initComboLenguage(ActionListener listener) {
 		comboLanguage = new JComboBox<>();
 		comboLanguage.setOpaque(false);
 		comboLanguage.setBackground(Constants.COLOR_BACKGROUND_P);
 		comboLanguage.setForeground(Color.WHITE);
+		comboLanguage.setActionCommand("Lenguage");
+		comboLanguage.addActionListener(listener);
 		comboLanguage.addItem(Constants.LENGUAGE_ES);
 		comboLanguage.addItem(Constants.LENGUAGE_EN);
+	}
+
+	public String getLenguage() {
+		return (String) comboLanguage.getSelectedItem();
+	}
+	
+	@Override
+	public void run() {
+		String language = (String) comboLanguage.getSelectedItem();
+		if(language.equals(Constants.LENGUAGE_ES)) {
+			Constants.createInstance().changeLenguageES();
+		}else {
+			Constants.createInstance().changeLenguageEN();
+		}
 	}
 }

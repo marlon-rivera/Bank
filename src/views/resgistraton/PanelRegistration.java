@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import util.FileManager;
-import views.BankButton;
 import views.Constants;
 
 public class PanelRegistration extends JPanel {

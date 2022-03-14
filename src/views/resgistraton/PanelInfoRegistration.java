@@ -25,6 +25,7 @@ import models.Gender;
 import util.TextPrompt;
 import views.BankButton;
 import views.Constants;
+import views.PasswordTextRound;
 import views.TextFieldRound;
 
 public class PanelInfoRegistration extends JPanel {
@@ -47,7 +48,7 @@ public class PanelInfoRegistration extends JPanel {
 	private JLabel gender;
 	private JComboBox<Gender> genderComboBox;
 	private JLabel password;
-	private TextFieldRound passwordTxt;
+	private PasswordTextRound passwordTxt;
 	private BankButton buttonCreateAccount;
 
 	public PanelInfoRegistration(ActionListener listener) {
@@ -61,16 +62,19 @@ public class PanelInfoRegistration extends JPanel {
 		name = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_NAME));
 		name.setFont(Constants.FONT_LABEL);
 		nameTxt = new TextFieldRound(30);
+		nameTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_NAME), nameTxt);
 
 		lastName = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_LAST_NAME));
 		lastName.setFont(Constants.FONT_LABEL);
 		lastNameTxt = new TextFieldRound(30);
+		lastNameTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_LAST_NAME), lastNameTxt);
 
 		dateOfBirth = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_DATE_OF_BIRTH));
 		dateOfBirth.setFont(Constants.FONT_LABEL);
 		dateOfBirthTxt = new TextFieldRound(30);
+		dateOfBirthTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_DATE_OF_BIRTH), dateOfBirthTxt);
 		calendar = new JDateChooser();
 		calendar.setPreferredSize(new Dimension(24, 20));
@@ -95,16 +99,19 @@ public class PanelInfoRegistration extends JPanel {
 		idNumber = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_ID_NUMBER));
 		idNumber.setFont(Constants.FONT_LABEL);
 		idNumberTxt = new TextFieldRound(30);
+		idNumberTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_ID_NUMBER), idNumberTxt);
 
 		email = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_EMAIL));
 		email.setFont(Constants.FONT_LABEL);
 		emailTxt = new TextFieldRound(30);
+		emailTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_EMAIL), emailTxt);
 
 		numberPhone = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_NUMBER_PHONE));
 		numberPhone.setFont(Constants.FONT_LABEL);
 		numberPhoneTxt = new TextFieldRound(30);
+		numberPhoneTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_NUMBER_PHONE), numberPhoneTxt);
 
 		gender = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_GENDER));
@@ -113,7 +120,8 @@ public class PanelInfoRegistration extends JPanel {
 
 		password = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_PASSWORD));
 		password.setFont(Constants.FONT_LABEL);
-		passwordTxt = new TextFieldRound(30);
+		passwordTxt = new PasswordTextRound(30);
+		passwordTxt.setForeground(Color.BLACK);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_PASSWORD), passwordTxt);
 
 		buttonCreateAccount = new BankButton(
@@ -166,8 +174,8 @@ public class PanelInfoRegistration extends JPanel {
 	private void initGenderComboBox() {
 		genderComboBox = new JComboBox<Gender>();
 		genderComboBox.setOpaque(false);
+		genderComboBox.setBackground(new Color(0, 0, 0, 95));
 		genderComboBox.setFont(Constants.FONT_LABEL);
-		genderComboBox.setBackground(new Color(0, 0, 0, 0));
 		genderComboBox.setForeground(new Color(255, 255, 255));
 		genderComboBox.addItem(Gender.FEMALE);
 		genderComboBox.addItem(Gender.MALE);
@@ -176,7 +184,7 @@ public class PanelInfoRegistration extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(new Color(255, 255, 255, 80));
+		g2d.setColor(new Color(255, 255, 255, 120));
 		g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
 		super.paint(g);
 	}

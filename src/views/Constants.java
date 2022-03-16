@@ -26,6 +26,8 @@ public class Constants extends Properties{
 	public static final String ICON_LOGIN = "ICON_LOGIN";
 	public static final String ICON_BANK = "ICON_BANK";
 	public static final String BAKCGROUND_LOGIN = "BAKCGROUND_LOGIN";
+	public static final String SHOW_PASS = "SHOW_PASS";
+	public static final String ICON_LOG_OUT = "ICON_LOG_OUT";
 	
 	//Colors BUTTONS
 	
@@ -83,6 +85,16 @@ public class Constants extends Properties{
 	public static final String TEXT_USER = "TEXT_USER";
 	public static final String DEFAULT_PHOTO = "DEFAULT_PHOTO";
 	public static final String TEXT_AGE = "TEXT_AGE";
+	public static final String BUTTON_SHOW_TRANSACTIONS = "BUTTON_SHOW_TRANSACTIONS";
+	public static final String COMMAND_BUTTON_SHOW_TRANSACTIONS = "COMMAND_BUTTON_SHOW_TRANSACTIONS";
+	public static final String TEXT_TRANSACTIONS = "TEXT_TRANSACTIONS"; 
+	public static final String TEXT_TRANSACTION_AMOUNT = "TEXT_TRANSACTION_AMOUNT";
+	public static final String TEXT_TRANSACTION_DATE = "TEXT_TRANSACTION_DATE";
+	public static final String TEXT_TRANSACTION_TYPE = "TEXT_TRANSACTION_TYPE";
+	public static final String BUTTON_NEXT_TRANSACTION = "BUTTON_NEXT_TRANSACTION";
+	public static final String COMMAND_BUTTON_NEXT_TRANSACTION = "COMMAND_BUTTON_NEXT_TRANSACTION";
+	public static final String BUTTON_PREVIOUS_TRANSACTION = "BUTTON_PREVIOUS_TRANSACTION";
+	public static final String COMMAND_BUTTON_PREVIOUS_TRANSACTION = "COMMAND_BUTTON_PREIVOUS_TRANSACTION"; 
 	
 	//Main Panel
 	
@@ -108,7 +120,25 @@ public class Constants extends Properties{
 	public static final String COMMAND_BUTTON_CROSS = "COMMAND_BUTTON_CROSS"; 
 	public static final String BUTTON_BACK = "BUTTON_BACK";
 	public static final String COMMAND_BUTTON_BACK = "COMMAND_BUTTON_BACK";
+	public static final String COMMAND_BUTTON_LOG_OUT = "COMMAND_BUTTON_LOG_OUT";
+	public static final String ERROR = "Error";
+	public static final String INFORMATION = "INFORMATION";
 	
+	//Error data
+	
+	public static final String ERROR_DATA_BLANK = "ERROR_DATA_BLANK";
+	public static final String ERROR_DATA_USERNAME_LOGIN = "ERROR_DATA_USERNAME_LOGIN";
+	public static final String ERROR_DATA_PASSWORD_LOGIN = "ERROR_DATA_PASSWORD_LOGIN";
+	public static final String ACCOUNT_SUCCESSFULLY_CREATED = "ACCOUNT_SUCCESFULLY_CREATED";
+	public static final String TRANSFER_SUCCESSFULLY = "TRANSFER_SUCCESSFULLY";
+	public static final String WITHDRAW_SUCCESSFULLY = "WITHDRAW_SUCCESSFULLY";
+	public static final String ERROR_TRANSACTIONS = "ERROR_TRANSACTIONS";
+	
+	//Exceptions
+	
+	public static final String USER_NOT_FOUND_EXCEPTION = "USER_NOT_FOUND_EXCEPTION";
+	public static final String NOT_ENOUGH_MONEY_EXCEPTION = "NOT_ENOUGH_MONEY_EXCEPTION";
+	public static final String ACCOUNT_NOT_FOUND_EXCEPTION = "ACCOUNT_NOT_FOUND_EXCEPTION";
 	
 	public Constants(String path) {
 		try {

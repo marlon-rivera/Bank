@@ -53,8 +53,20 @@ public class LoginPanel extends JPanel {
 		return imageScaled.getHeight(this);
 	}
 	
+	public String getUsernameLogin() {
+		return loginInformationPanel.getUsernameLogin();
+	}
+	
+	public String getPasswordLogin() {
+		return loginInformationPanel.getPasswordLogin();
+	}
+	
 	public String getLenguage() {
 		return loginInformationPanel.getLenguage();
+	}
+	
+	public void resetInfoLogin() {
+		loginInformationPanel.resetInfoLogin();
 	}
 	
 }

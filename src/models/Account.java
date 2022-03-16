@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Account {
 
@@ -16,6 +17,15 @@ public class Account {
 		this.passwordAccount = passwordAccount;
 		this.money = money;
 		transactions = new ArrayList<>();
+	}
+	
+	public void sortBankingTransactions() {
+		transactions.sort(new Comparator<BankingTransaction>(){ 
+			@Override
+			public int compare(BankingTransaction o1, BankingTransaction o2) {
+				return o1.getDate().compareTo(o2.getDate());
+			}
+		});
 	}
 
 	public User getUser() {
@@ -61,5 +71,4 @@ public class Account {
 	public void addTransaction(BankingTransaction transaction) {
 		this.transactions.add(transaction);
 	}
-	
 }

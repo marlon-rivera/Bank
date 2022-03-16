@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -15,15 +16,19 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import models.FilterInteger;
 import models.Gender;
+import models.HidePassword;
 import util.TextPrompt;
 import views.BankButton;
+import views.BankButtonIcon;
 import views.Constants;
 import views.PasswordTextRound;
 import views.TextFieldRound;
@@ -49,6 +54,7 @@ public class PanelInfoRegistration extends JPanel {
 	private JComboBox<Gender> genderComboBox;
 	private JLabel password;
 	private PasswordTextRound passwordTxt;
+	private BankButtonIcon buttonShowPassword;
 	private BankButton buttonCreateAccount;
 
 	public PanelInfoRegistration(ActionListener listener) {
@@ -75,6 +81,7 @@ public class PanelInfoRegistration extends JPanel {
 		dateOfBirth.setFont(Constants.FONT_LABEL);
 		dateOfBirthTxt = new TextFieldRound(30);
 		dateOfBirthTxt.setForeground(Color.BLACK);
+		dateOfBirthTxt.setEditable(false);
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_DATE_OF_BIRTH), dateOfBirthTxt);
 		calendar = new JDateChooser();
 		calendar.setPreferredSize(new Dimension(24, 20));
@@ -100,6 +107,7 @@ public class PanelInfoRegistration extends JPanel {
 		idNumber.setFont(Constants.FONT_LABEL);
 		idNumberTxt = new TextFieldRound(30);
 		idNumberTxt.setForeground(Color.BLACK);
+		idNumberTxt.addKeyListener(new FilterInteger(idNumberTxt));
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_ID_NUMBER), idNumberTxt);
 
 		email = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_EMAIL));
@@ -112,6 +120,7 @@ public class PanelInfoRegistration extends JPanel {
 		numberPhone.setFont(Constants.FONT_LABEL);
 		numberPhoneTxt = new TextFieldRound(30);
 		numberPhoneTxt.setForeground(Color.BLACK);
+		numberPhoneTxt.addKeyListener(new FilterInteger(numberPhoneTxt));
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_NUMBER_PHONE), numberPhoneTxt);
 
 		gender = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_GENDER));
@@ -128,6 +137,10 @@ public class PanelInfoRegistration extends JPanel {
 				Constants.createInstance().getProperty(Constants.BUTTON_CREATE_YOUR_ACCOUNT),
 				Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_CREATE_YOUR_ACCOUNT), listener,
 				Constants.COLOR_BACKGROUND_P, Constants.COLOR_BACKGROUND_S, 150, 40);
+
+		ImageIcon image = new ImageIcon(Constants.createInstance().getProperty(Constants.SHOW_PASS));
+		ImageIcon imageScaled = new ImageIcon(image.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH));
+		buttonShowPassword = new BankButtonIcon(imageScaled, new HidePassword(passwordTxt), "", 18, 18, false);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -167,6 +180,11 @@ public class PanelInfoRegistration extends JPanel {
 		this.add(password, gbc);
 		gbc.gridy = 7;
 		this.add(passwordTxt, gbc);
+		gbc.gridx = 1;
+		Insets insets1 = new Insets(0, 350, 0, 0);
+		gbc.insets = insets1;
+		this.add(buttonShowPassword, gbc);
+		gbc.insets = insets;
 		gbc.gridy = 8;
 		this.add(buttonCreateAccount, gbc);
 	}
@@ -179,6 +197,48 @@ public class PanelInfoRegistration extends JPanel {
 		genderComboBox.setForeground(new Color(255, 255, 255));
 		genderComboBox.addItem(Gender.FEMALE);
 		genderComboBox.addItem(Gender.MALE);
+	}
+
+	public String getRegistrationName() {
+		return nameTxt.getText();
+	}
+
+	public String getRegistrationLastName() {
+		return lastNameTxt.getText();
+	}
+
+	public String getRegistrationDateOfBirth() {
+		return dateOfBirthTxt.getText();
+	}
+
+	public String getResgistrationEmail() {
+		return emailTxt.getText();
+	}
+
+	public String getRegistrationNumberPhone() {
+		return numberPhoneTxt.getText();
+	}
+
+	public Gender getRegistrationGender() {
+		return Gender.valueOf(genderComboBox.getSelectedItem().toString());
+	}
+	
+	public String getRegistrationPassword() {
+		return String.valueOf(passwordTxt.getPassword());
+	}
+	
+	public String getResgitrationId() {
+		return idNumberTxt.getText();
+	}
+	
+	public void resetInfoRegistration() {
+		nameTxt.setText("");
+		lastNameTxt.setText("");
+		numberPhoneTxt.setText("");
+		idNumberTxt.setText("");
+		emailTxt.setText("");
+		passwordTxt.setText("");
+		dateOfBirthTxt.setText("");
 	}
 
 	@Override

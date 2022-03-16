@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -13,9 +14,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import models.FilterInteger;
+import models.HidePassword;
 import util.FileManager;
 import util.TextPrompt;
 import views.BankButton;
+import views.BankButtonIcon;
 import views.Constants;
 import views.PasswordTextRound;
 import views.TextFieldRound;
@@ -28,6 +32,7 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 	private TextFieldRound usernameTxt;
 	private JLabel password;
 	private PasswordTextRound passwordTxt;
+	private BankButtonIcon buttonShowPassword;
 	private BankButton buttonEnter;
 	private BankButton buttonRegister;
 	private JLabel language;
@@ -51,6 +56,7 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 		username.setFont(Constants.FONT_LABEL);
 		username.setForeground(Color.BLACK);
 		usernameTxt = new TextFieldRound(15);
+		usernameTxt.addKeyListener(new FilterInteger(usernameTxt));
 		new TextPrompt(Constants.createInstance().getProperty(Constants.PLACE_HOLDER_USERNMAE), usernameTxt);
 		password = new JLabel(Constants.createInstance().getProperty(Constants.TEXT_PASSWORD));
 		password.setFont(Constants.FONT_LABEL);
@@ -69,11 +75,15 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 		language.setFont(Constants.FONT_LABEL);
 		language.setForeground(new Color(0,0,0,0));
 		initComboLenguage(listener);
-		Insets insets = new Insets(10, 40, 0, 40);
+		
+		ImageIcon imagePass = new ImageIcon(Constants.createInstance().getProperty(Constants.SHOW_PASS));
+		ImageIcon imageScaledPass = new ImageIcon(imagePass.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH));
+		buttonShowPassword = new BankButtonIcon(imageScaledPass, new HidePassword(passwordTxt), "", 18, 18, true);
+		Insets insets = new Insets(10, 40, 0, 0);
 		gbc.insets = insets;
 		this.add(labelUserIcon, gbc);
 		gbc.gridy = 1;
-		insets = new Insets(10, 40, 0, 40);
+		insets = new Insets(10, 40, 0, 0);
 		gbc.insets = insets;
 		this.add(username, gbc);
 		gbc.gridy = 2;
@@ -82,26 +92,30 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 		gbc.gridy = 3;
 		this.add(password, gbc);
 		gbc.gridy = 4;
-		insets = new Insets(10, 40, 0, 40);
+		insets = new Insets(10, 40, 0, 0);
 		gbc.insets = insets;
 		this.add(passwordTxt, gbc);
-		insets = new Insets(10, 40, 0, 40);
+		insets = new Insets(10, -13, 0, 0);
+		gbc.insets = insets;
+		this.add(buttonShowPassword, gbc);
+		insets = new Insets(10, 40, 0, 0);
+		gbc.gridx = 0;
 		gbc.insets = insets;
 		gbc.gridy = 5;
 		this.add(buttonEnter, gbc);
-		insets = new Insets(10, 0, 0, 0);
+		insets = new Insets(10, 40, 0, 0);
 		gbc.insets = insets;
 		gbc.gridy = 6;
 		this.add(buttonRegister, gbc);
 		gbc.gridy = 8;
-		insets = new Insets(15, 0, 10, 0);
+		insets = new Insets(15, 0, 20, 0);
 		gbc.insets = insets;
 		this.add(comboLanguage, gbc);
 		insets = new Insets(10, 15, 0, 0);
 		gbc.insets = insets;
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.gridy = 7;
-		this.add(language, gbc);
+		this.add(language, gbc); 
 	}
 
 	private void initComboLenguage(ActionListener listener) {
@@ -117,6 +131,19 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 
 	public String getLenguage() {
 		return (String) comboLanguage.getSelectedItem();
+	}
+	
+	public String getUsernameLogin() {
+		return usernameTxt.getText();
+	}
+	
+	public String getPasswordLogin() {
+		return String.valueOf(passwordTxt.getPassword());
+	}
+	
+	public void resetInfoLogin() {
+		usernameTxt.setText("");
+		passwordTxt.setText("");
 	}
 	
 	@Override

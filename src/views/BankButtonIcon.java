@@ -11,9 +11,13 @@ import javax.swing.JButton;
 public class BankButtonIcon extends JButton {
 
 	private static final long serialVersionUID = 1L;
+	private int width;
+	private int heigth;
 	
 	public BankButtonIcon(ImageIcon icon, ActionListener listener, String command, int width, int heigth,
 			boolean isScaled) {
+		this.width = width;
+		this.heigth = heigth;
 		if (isScaled) {
 			ImageIcon iconScaled = new ImageIcon(icon.getImage().getScaledInstance(width, heigth, Image.SCALE_SMOOTH));
 			this.setIcon(iconScaled);
@@ -27,5 +31,13 @@ public class BankButtonIcon extends JButton {
 		this.setBorderPainted(false);
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.setFocusPainted(false);
+	}
+	
+	public int getWidthButton() {
+		return width;
+	}
+	
+	public int getHeigthButton() {
+		return heigth;
 	}
 }

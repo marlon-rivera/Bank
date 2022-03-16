@@ -13,7 +13,6 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -74,13 +73,5 @@ public class PanelPhoto extends JPanel {
 		graphics2d.setClip(new Ellipse2D.Double(0, 0, getWidth(), getHeight()));
 		graphics2d.drawImage(imagePhoto.getImage(), 0, 0, getWidth(), getHeight(), this);
 
-	}
-	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setSize(400,400);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new PanelPhoto());
 	}
 }

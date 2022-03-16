@@ -39,7 +39,7 @@ public class MainPanel extends JPanel {
 		labelMain.setFont(new Font("Arial", Font.PLAIN, 20));
 		labelMain.setForeground(Color.WHITE);
 
-		infoAccount = new PanelInfoAccount();
+		infoAccount = new PanelInfoAccount(listener);
 		infoAccount.setSize(new Dimension(440, 230));
 
 		infoUser = new PanelInfoUser();
@@ -59,6 +59,41 @@ public class MainPanel extends JPanel {
 		this.add(options).setBounds(0, getHeight() - options.getHeight(), options.getWidth(), options.getHeight());
 
 		this.add(labelBackground).setBounds(0, 0, imageScaled.getIconWidth(), imageScaled.getIconHeight());
-
+	}
+	
+	public void setResultName(String name) {
+		infoUser.setResultName(name);
+	}
+	
+	public void setResultLastName(String lastName) {
+		infoUser.setResultLastName(lastName);
+	}
+	
+	public void setResultAge(String age) {
+		infoUser.setResultAge(age);
+	}
+	
+	public void setResultGender(String gender) {
+		infoUser.setResultGender(gender);
+	}
+	
+	public void setResultEmail(String email) {
+		infoUser.setResultEmail(email);
+	}
+	
+	public void setResultIdNumber(String idNumber) {
+		infoUser.setResultIdNumber(idNumber);
+	}
+	
+	public void setResultMoney(String money) {
+		infoAccount.setResultMoney(money);
+	}
+	
+	public void setResultNumberAccount(String numberAccount) {
+		infoAccount.setResultNumberAccount(numberAccount);
+	}
+	
+	public void setResultUser(String user) {
+		infoAccount.setResultUser(user);
 	}
 }

@@ -1,45 +1,63 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankManager {
 
 	private ArrayList<Account> accounts;
-	
+
 	public BankManager() {
 		accounts = new ArrayList<>();
 	}
-	
-	public void createAccount(User user, String password) {
-		accounts.add(new Account(user, user.getNumberPhone(), password, 0.0));
+
+	public void createAccount(Account account) {
+		this.accounts.add(account);
 	}
-	
-	public boolean transferMoney(double amount, Account accountOne, Account targetAccount) {
-		boolean flag = false;
-		if(accountOne.getMoney() >= amount) {
+
+	public ArrayList<Account> getAccounts() {
+		return this.accounts;
+	}
+
+	public void transferMoney(double amount, Account accountOne, long numberAccountTarget)
+			throws NotEnoughMoneyException, AccountNotFoundException {
+		Account targetAccount = searchAccount(numberAccountTarget);
+		if (accountOne.getMoney() >= amount) {
 			targetAccount.setMoney(targetAccount.getMoney() + amount);
 			accountOne.setMoney(accountOne.getMoney() - amount);
-			flag = true;
+			accountOne.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.TRANSFER_DISCOUNT, amount));
+			targetAccount.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.TRANSFER_INCREASE, amount));
+			return;
 		}
-		return flag;
+		throw new NotEnoughMoneyException();
 	}
-	
-	public Account searchAccount(long numberAccount) throws UserNotFoundException {
+
+	public Account searchAccount(long numberAccount) throws AccountNotFoundException {
 		for (Account account : accounts) {
-			if(account.getNumberAccount() == numberAccount) {
+			if (account.getNumberAccount() == numberAccount) {
 				return account;
 			}
 		}
-		throw new UserNotFoundException();
+		throw new AccountNotFoundException();
+	}
+
+	public void withdrawMoney(Account account, double amount) throws AccountNotFoundException, NotEnoughMoneyException {
+		if (account.getMoney() >= amount) {
+			account.setMoney(account.getMoney() - amount);
+			account.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.WITHDRAWALS, amount));
+			return;
+		}
+		throw new NotEnoughMoneyException();
 	}
 	
-	public boolean withdrawMoney(long numberAccount, double amount) throws UserNotFoundException {
-		boolean flag = false;
-		Account account = searchAccount(numberAccount);
-		if(account.getMoney() >= amount) {
-			account.setMoney(account.getMoney() - amount);
-		}
-		return flag;
+	public void depositMoney(Account account, double amount) {
+		account.setMoney(account.getMoney() + amount);
+		account.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.DEPOSIT_MONEY, amount));
+	}
+
+	public BankingTransaction getTransaction(Account account) {
+		
+		return null;
 	}
 	
 	public int[] plotNumberMenAndWomen() {
@@ -47,9 +65,9 @@ public class BankManager {
 		int numberWomen = 0;
 		int numberMen = 0;
 		for (Account account : accounts) {
-			if(account.getUser().getGender().equals(Gender.FEMALE)) {
+			if (account.getUser().getGender().equals(Gender.FEMALE)) {
 				numberWomen++;
-			}else {
+			} else {
 				numberMen++;
 			}
 		}

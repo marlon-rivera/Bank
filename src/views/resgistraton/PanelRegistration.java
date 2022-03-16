@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import models.Gender;
 import util.FileManager;
 import views.Constants;
 
@@ -45,6 +46,43 @@ public class PanelRegistration extends JPanel {
 		gbc.gridy = 0;
 		gbc.gridheight = 2;
 		this.add(labelBackground, gbc);
+	}
+	
+	
+	public String getRegistrationName() {
+		return panelInfoRegistration.getRegistrationName();
+	}
+
+	public String getRegistrationLastName() {
+		return panelInfoRegistration.getRegistrationLastName();
+	}
+
+	public String getRegistrationDateOfBirth() {
+		return panelInfoRegistration.getRegistrationDateOfBirth();
+	}
+
+	public String getResgistrationEmail() {
+		return panelInfoRegistration.getResgistrationEmail();
+	}
+
+	public String getRegistrationNumberPhone() {
+		return panelInfoRegistration.getRegistrationNumberPhone();
+	}
+
+	public Gender getRegistrationGender() {
+		return panelInfoRegistration.getRegistrationGender();
+	}
+	
+	public String getRegistrationPassword() {
+		return panelInfoRegistration.getRegistrationPassword();
+	}
+	
+	public String getResgitrationId() {
+		return panelInfoRegistration.getResgitrationId();
+	}
+	
+	public void resetInfoRegistration() {
+		panelInfoRegistration.resetInfoRegistration();
 	}
 	
 	public int getWidthImageBackground() {

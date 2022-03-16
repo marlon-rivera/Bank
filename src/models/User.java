@@ -12,7 +12,8 @@ public class User {
 	private long numberPhone;
 	private Gender gender;
 
-	public User(String name, String lastName, LocalDate birthDate, long id, String email, long numberPhone, Gender gender) {
+	public User(String name, String lastName, LocalDate birthDate, long id, String email, long numberPhone,
+			Gender gender) {
 		this.name = name;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
@@ -25,7 +26,7 @@ public class User {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -76,5 +77,10 @@ public class User {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	@Override
+	public String toString() {
+		return name + " " + lastName;
 	}
 }

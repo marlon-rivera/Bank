@@ -1,0 +1,79 @@
+[
+  {
+    "user": {
+      "name": "Marlon",
+      "lastName": "Rivera",
+      "birthDate": "06/05/2003",
+      "id": 1093592497,
+      "email": "marlon@uptc.co",
+      "numberPhone": 3132408239,
+      "gender": "MALE"
+    },
+    "numberAccount": 3132408239,
+    "passwordAccount": "Marlon1",
+    "money": 0.0,
+    "transactions": [
+      {
+        "date": "2022-03-17",
+        "type": "DEPOSIT_MONEY",
+        "amount": 90000.0
+      },
+      {
+        "date": "2022-03-17",
+        "type": "TRANSFER_DISCOUNT",
+        "amount": 75000.0
+      },
+      {
+        "date": "2022-03-17",
+        "type": "WITHDRAWALS",
+        "amount": 15000.0
+      }
+    ]
+  },
+  {
+    "user": {
+      "name": "Daniela",
+      "lastName": "Rivera",
+      "birthDate": "16/07/2001",
+      "id": 1005028180,
+      "email": "Daniela@gmail.com",
+      "numberPhone": 3006464894,
+      "gender": "FEMALE"
+    },
+    "numberAccount": 3006464894,
+    "passwordAccount": "Daniela1",
+    "money": 75000.0,
+    "transactions": [
+      {
+        "date": "2022-03-17",
+        "type": "TRANSFER_INCREASE",
+        "amount": 75000.0
+      },
+      {
+        "date": "2022-03-17",
+        "type": "WITHDRAWALS",
+        "amount": 25000.0
+      },
+      {
+        "date": "2022-03-17",
+        "type": "DEPOSIT_MONEY",
+        "amount": 25000.0
+      }
+    ]
+  },
+  {
+    "user": {
+      "name": "Valentina",
+      "lastName": "Rivera",
+      "birthDate": "25/03/2007",
+      "id": 1127053010,
+      "email": "valentina@gmail.com",
+      "numberPhone": 3507365036,
+      "gender": "FEMALE"
+    },
+    "numberAccount": 3507365036,
+    "passwordAccount": "Valentina1",
+    "money": 0.0,
+    "transactions": []
+  }
+]

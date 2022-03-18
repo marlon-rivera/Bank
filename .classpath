@@ -7,5 +7,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="src/lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="src/lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="src/lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

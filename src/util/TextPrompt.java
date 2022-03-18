@@ -69,40 +69,12 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 		check();
 	}
 
-	public void change(float a) {
-		change((int) (a * 255));
-	}
-
-	public void change(int a) {
-		a = a > 255 ? 255 : a < 0 ? 0 : a;
-
-		Color fontColor = getForeground();
-		int red = fontColor.getRed();
-		int green = fontColor.getGreen();
-		int blue = fontColor.getBlue();
-
-		Color color = new Color(red, green, blue, a);
-		super.setForeground(color);
-	}
-
-	public void changeStyle(int style) {
-		setFont(getFont().deriveFont(style));
-	}
-
 	public Show getShow() {
 		return show;
 	}
 
 	public void setShow(Show show) {
 		this.show = show;
-	}
-
-	public boolean getShowPromptOnce() {
-		return showPromptOnce;
-	}
-
-	public void setShowPromptOnce(boolean showPromptOnce) {
-		this.showPromptOnce = showPromptOnce;
 	}
 
 	private void check() {

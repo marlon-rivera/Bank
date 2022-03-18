@@ -123,10 +123,10 @@ public class LoginInformationPanel extends JPanel implements Runnable{
 		comboLanguage.setOpaque(false);
 		comboLanguage.setBackground(Constants.COLOR_BACKGROUND_P);
 		comboLanguage.setForeground(Color.WHITE);
-		comboLanguage.setActionCommand("Lenguage");
-		comboLanguage.addActionListener(listener);
+		comboLanguage.setActionCommand(Constants.COMMAND_CHANGE_LANGUAGE);
 		comboLanguage.addItem(Constants.LENGUAGE_ES);
 		comboLanguage.addItem(Constants.LENGUAGE_EN);
+		comboLanguage.addActionListener(listener);
 	}
 
 	public String getLenguage() {

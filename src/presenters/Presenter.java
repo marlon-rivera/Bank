@@ -14,6 +14,8 @@ import models.BankingTransaction;
 import models.Gender;
 import models.NotEnoughMoneyException;
 import models.User;
+import peresistence.Persistence;
+import views.Constants;
 import views.FrameMain;
 
 public class Presenter implements ActionListener {
@@ -26,12 +28,16 @@ public class Presenter implements ActionListener {
 	private static final String COMMAND_CREATE_ACCOUNT = "CreateAccount";
 	private static final String COMMAND_TRANSFER = "transfer";
 	private static final String COMMAND_WITHDRAW = "withdraw";
+	private static final String COMMAND_DEPOSIT = "deposit";
 	private static final String COMMAND_SHOW_TRANSACTIONS = "showtransactions";
 	private static final String COMMAND_LOG_OUT = "logout";
 	private static final String COMMAND_MAKE_TRANSFER = "maketransfer";
 	private static final String COMMAND_MAKE_WITHDRAW = "makewithdraw";
+	private static final String COMMAND_MAKE_DEPOSIT = "makedeposit";
 	private static final String COMMAND_NEXT_TRANSACTION = "nexttransaction";
 	private static final String COMMAND_PREVIOUS_TRANSACTION = "previostransaction";
+	private static final String COMMAND_CHANGE_LANGUAGE = "changelanguage";
+	private static final String COMMAND_BART_CHART = "createbartchart";
 
 	private FrameMain frameMain;
 	private BankManager bankManager;
@@ -44,29 +50,27 @@ public class Presenter implements ActionListener {
 	public Presenter() {
 		frameMain = new FrameMain(this);
 		bankManager = new BankManager();
-		bankManager.createAccount(
-				new Account(new User("Marlon", "Rivera", LocalDate.now(), 1093592497, "@", 313240823, Gender.MALE),
-						313240823, "marlon1", 15000));
-		bankManager.createAccount(
-				new Account(new User("Marlon", "Rivera", LocalDate.now(), 1093592496, "@", 313240824, Gender.MALE),
-						313240824, "marlon2", 15000));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		System.out.println(command);
 		switch (command) {
 		case COMMAND_CROSS:
+			Persistence.saveAccounts(bankManager.getAccounts());
 			frameMain.setVisible(false);
 			frameMain.dispose();
 			break;
 		case COMMAND_BACK:
-			frameMain.hidePanelRegistration();
+			frameMain.hidePanelRegistration();			
 			frameMain.showLoginPanel();
+			frameMain.showButtonChartPanel();
 			break;
 		case COMMAND_REGISTER:
 			frameMain.hideLoginPanel();
 			frameMain.showPanelRegistration();
+			frameMain.hideButtonShowBartChart();
 			break;
 		case COMMAND_ENTER:
 			if (login()) {
@@ -87,10 +91,15 @@ public class Presenter implements ActionListener {
 			frameMain.hideMainPanel();
 			frameMain.showWithdrawPanel();
 			break;
+		case COMMAND_DEPOSIT:
+			frameMain.hideMainPanel();
+			frameMain.showDepositPanel();
+			break;
 		case COMMAND_BACK_OPTIONS:
 			frameMain.hideTransferPanel();
 			frameMain.hideWithdrawPanel();
 			frameMain.hidePanelShowTransactions();
+			frameMain.hideDepositPanel();
 			frameMain.showMainPanel();
 			break;
 		case COMMAND_SHOW_TRANSACTIONS:
@@ -138,9 +147,16 @@ public class Presenter implements ActionListener {
 				frameMain.resetInfoWithdrawal();
 			}
 			break;
+		case COMMAND_MAKE_DEPOSIT:
+			if(validateInfoDeposit() && makeDeposit()) {
+				transactions = actualAccount.getTransactions();
+				setInfoAccount();
+				frameMain.showDepositSuccessfully();
+				frameMain.resetInfoDeposit();
+			}
+			break;
 		case COMMAND_NEXT_TRANSACTION:
 			if (transactions != null && positionTransactions < transactions.size() - 1) {
-				System.out.println("entro");
 				transaction = transactions.get(++positionTransactions);
 				frameMain.setDateTransaction(transaction.getDate().toString());
 				frameMain.setAmountTransaction(String.valueOf(transaction.getAmount()));
@@ -149,12 +165,28 @@ public class Presenter implements ActionListener {
 			break;
 		case COMMAND_PREVIOUS_TRANSACTION:
 			if (transactions != null && positionTransactions > 0) {
-				System.out.println("entro");
 				transaction = transactions.get(--positionTransactions);
 				frameMain.setDateTransaction(transaction.getDate().toString());
 				frameMain.setAmountTransaction(String.valueOf(transaction.getAmount()));
 				frameMain.setTypeTransaction(transaction.getType().toString());
 			}
+			break;
+		case COMMAND_CHANGE_LANGUAGE:
+			String language = frameMain.getLenguage();
+			if(language.equals(Constants.LENGUAGE_EN)) {
+				Constants.createInstance().changeLenguageEN();
+				frameMain.setVisible(false);
+				frameMain.dispose();
+				frameMain = new FrameMain(this);
+			}else if(language.equals(Constants.LENGUAGE_ES)){
+				Constants.createInstance().changeLenguageES();
+				frameMain.setVisible(false);
+				frameMain.dispose();
+				frameMain = new FrameMain(this);
+			}
+			break;
+		case COMMAND_BART_CHART:
+			frameMain.createBartChartJDialog(bankManager.plotNumberMenAndWomen());
 			break;
 		}
 	}
@@ -198,8 +230,8 @@ public class Presenter implements ActionListener {
 	private void setInfoUser() {
 		frameMain.setResultName(actualUser.getName());
 		frameMain.setResultLastName(actualUser.getLastName());
-		Period age = Period.between(actualUser.getBirthDate(), LocalDate.now());
-		frameMain.setResultAge(String.valueOf(age.getYears()));
+		Period age = Period.between(LocalDate.parse(actualUser.getBirthDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalDate.now());
+		frameMain.setResultAge(String.valueOf(age.getYears())); 
 		frameMain.setResultGender(String.valueOf(actualUser.getGender()));
 		frameMain.setResultEmail(actualUser.getEmail());
 		frameMain.setResultIdNumber(String.valueOf(actualUser.getId()));
@@ -220,9 +252,7 @@ public class Presenter implements ActionListener {
 	private Account createAccount() {
 		String name = frameMain.getRegistrationName();
 		String lastName = frameMain.getRegistrationLastName();
-		String date = frameMain.getRegistrationDateOfBirth();
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dateOfBirth = LocalDate.parse(date, dateTimeFormatter);
+		String dateOfBirth = frameMain.getRegistrationDateOfBirth();
 		String email = frameMain.getResgistrationEmail();
 		long numberPhone = Long.parseLong(frameMain.getRegistrationNumberPhone());
 		Gender gender = frameMain.getRegistrationGender();
@@ -260,7 +290,7 @@ public class Presenter implements ActionListener {
 
 	private boolean validateInfoWithdraw() {
 		if (!frameMain.validateAmountWithdrawal() || !frameMain.validatePasswordWithdraw()) {
-			frameMain.showDataErrorUsernameLogin();
+			frameMain.showDataErrorBlank();
 		} else {
 			return true;
 		}
@@ -281,5 +311,23 @@ public class Presenter implements ActionListener {
 			frameMain.showError(e.getMessage());
 			return false;
 		}
+	}
+	
+	private boolean validateInfoDeposit() {
+		if(!frameMain.validateAmountDeposit() || !frameMain.validatePasswordDeposit()) {
+			frameMain.showDataErrorBlank();
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean makeDeposit() {
+		double amount = Double.parseDouble(frameMain.getAmountDeposit());
+		if(actualAccount.getPasswordAccount().equals(frameMain.getPasswordDeposit())) {			
+			bankManager.depositMoney(actualAccount, amount);
+			return true;
+		}
+		frameMain.showDataErrorPasswordLogin();
+		return false;
 	}
 }

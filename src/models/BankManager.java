@@ -3,12 +3,14 @@ package models;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import peresistence.Persistence;
+
 public class BankManager {
 
 	private ArrayList<Account> accounts;
 
 	public BankManager() {
-		accounts = new ArrayList<>();
+		accounts = Persistence.readAccounts();
 	}
 
 	public void createAccount(Account account) {
@@ -25,8 +27,8 @@ public class BankManager {
 		if (accountOne.getMoney() >= amount) {
 			targetAccount.setMoney(targetAccount.getMoney() + amount);
 			accountOne.setMoney(accountOne.getMoney() - amount);
-			accountOne.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.TRANSFER_DISCOUNT, amount));
-			targetAccount.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.TRANSFER_INCREASE, amount));
+			accountOne.addTransaction(new BankingTransaction(LocalDate.now().toString(), TypeTransaction.TRANSFER_DISCOUNT, amount));
+			targetAccount.addTransaction(new BankingTransaction(LocalDate.now().toString(), TypeTransaction.TRANSFER_INCREASE, amount));
 			return;
 		}
 		throw new NotEnoughMoneyException();
@@ -44,7 +46,7 @@ public class BankManager {
 	public void withdrawMoney(Account account, double amount) throws AccountNotFoundException, NotEnoughMoneyException {
 		if (account.getMoney() >= amount) {
 			account.setMoney(account.getMoney() - amount);
-			account.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.WITHDRAWALS, amount));
+			account.addTransaction(new BankingTransaction(LocalDate.now().toString(), TypeTransaction.WITHDRAWALS, amount));
 			return;
 		}
 		throw new NotEnoughMoneyException();
@@ -52,7 +54,7 @@ public class BankManager {
 	
 	public void depositMoney(Account account, double amount) {
 		account.setMoney(account.getMoney() + amount);
-		account.addTransaction(new BankingTransaction(LocalDate.now(), TypeTransaction.DEPOSIT_MONEY, amount));
+		account.addTransaction(new BankingTransaction(LocalDate.now().toString(), TypeTransaction.DEPOSIT_MONEY, amount));
 	}
 
 	public BankingTransaction getTransaction(Account account) {

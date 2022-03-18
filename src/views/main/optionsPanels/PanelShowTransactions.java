@@ -35,8 +35,6 @@ public class PanelShowTransactions extends JPanel {
 		this.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		initComponents(listener);
-		System.out.println(Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_NEXT_TRANSACTION));
-		System.out.println(Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_PREVIOUS_TRANSACTION));
 	}
 
 	private void initComponents(ActionListener listener) {

@@ -1,24 +1,22 @@
 package models;
 
-import java.time.LocalDate;
-
 public class BankingTransaction {
 
-	private LocalDate date;
+	private String date;
 	private TypeTransaction type;
 	private double amount;
 
-	public BankingTransaction(LocalDate date, TypeTransaction type, double amount) {
+	public BankingTransaction(String date, TypeTransaction type, double amount) {
 		this.date = date;
 		this.type = type;
 		this.amount = amount;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

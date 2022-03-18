@@ -46,6 +46,7 @@ public class Constants extends Properties{
 	public static final String COMMAND_BUTTON_REGISTER = "COMMAND_BUTTON_REGISTER";
 	public static final String TEXT_LANGUAGE = "TEXT_LANGUAGE";
 	public static final Font FONT_LABEL = new Font("Arial", Font.PLAIN, 16);
+	public static final String COMMAND_CHANGE_LANGUAGE = "changelanguage";
 	
 	//Panel Info Registration
 	
@@ -113,6 +114,10 @@ public class Constants extends Properties{
 	//WithdrawPanel
 	
 	public static final String COMMAND_BUTTON_MAKE_WITHDRAW = "COMMAND_BUTTON_MAKE_WITHDRAW";
+
+	//DepositPanel
+	
+	public static final String COMMAND_BUTTON_MAKE_DEPOSIT = "makedeposit";
 	
 	//Main Frame 
 	
@@ -129,9 +134,10 @@ public class Constants extends Properties{
 	public static final String ERROR_DATA_BLANK = "ERROR_DATA_BLANK";
 	public static final String ERROR_DATA_USERNAME_LOGIN = "ERROR_DATA_USERNAME_LOGIN";
 	public static final String ERROR_DATA_PASSWORD_LOGIN = "ERROR_DATA_PASSWORD_LOGIN";
-	public static final String ACCOUNT_SUCCESSFULLY_CREATED = "ACCOUNT_SUCCESFULLY_CREATED";
+	public static final String ACCOUNT_SUCCESSFULLY_CREATED = "ACCOUNT_SUCCESSFULLY_CREATED";
 	public static final String TRANSFER_SUCCESSFULLY = "TRANSFER_SUCCESSFULLY";
 	public static final String WITHDRAW_SUCCESSFULLY = "WITHDRAW_SUCCESSFULLY";
+	public static final String DEPOSIT_SUCCESSFULLY = "DEPOSIT_SUCCESSFULLY";
 	public static final String ERROR_TRANSACTIONS = "ERROR_TRANSACTIONS";
 	
 	//Exceptions
@@ -139,6 +145,17 @@ public class Constants extends Properties{
 	public static final String USER_NOT_FOUND_EXCEPTION = "USER_NOT_FOUND_EXCEPTION";
 	public static final String NOT_ENOUGH_MONEY_EXCEPTION = "NOT_ENOUGH_MONEY_EXCEPTION";
 	public static final String ACCOUNT_NOT_FOUND_EXCEPTION = "ACCOUNT_NOT_FOUND_EXCEPTION";
+	
+	//BartChartJDialog
+	
+	public static final String WOMEN = "WOMEN";
+	public static final String MEN = "MEN";
+	public static final String QUANTITY = "QUANTITY";
+	public static final String TITLE_BART_CHART = "TITLE_BART_CHART";
+	public static final String ICON_BUTTON_BART_CHART = "src/res/bartchart.png";
+	public static final String COMMAND_BUTTON_BART_CHART = "COMMAND_BUTTON_BART_CHART";
+	
+	
 	
 	public Constants(String path) {
 		try {

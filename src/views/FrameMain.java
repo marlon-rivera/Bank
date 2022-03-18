@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 
@@ -9,8 +10,10 @@ import javax.swing.JOptionPane;
 
 import models.Gender;
 import util.FileManager;
+import views.bartChart.BartChartJDialog;
 import views.login.LoginPanel;
 import views.main.MainPanel;
+import views.main.optionsPanels.DepositPanel;
 import views.main.optionsPanels.PanelShowTransactions;
 import views.main.optionsPanels.TransferPanel;
 import views.main.optionsPanels.WithdrawPanel;
@@ -26,17 +29,19 @@ public class FrameMain extends JFrame {
 	private TransferPanel transferPanel;
 	private WithdrawPanel withdrawPanel;
 	private PanelShowTransactions panelShowTransactions;
+	private DepositPanel depositPanel;
+	private BartChartJDialog bartChartJDialog;
 	private BankButton backButtonRegister;
 	private BankButton crossButton;
 	private BankButton backButtonOptions;
 	private BankButtonIcon buttonLogOut;
+	private BankButtonIcon buttonBartChart;
 
 	public FrameMain(ActionListener listener) {
 		setLayout(null);
 		setSize(683, 384);
 		setTitle(LOGIN_BANK);
 		setLocationRelativeTo(null);
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Image image = FileManager.loadImage(Constants.createInstance().getProperty(Constants.ICON_BANK));
 		setIconImage(image);
@@ -44,8 +49,9 @@ public class FrameMain extends JFrame {
 		setUndecorated(true);
 		addNotify();
 		initComponents(listener);
+		showButtonChartPanel();
 		showLoginPanel();
-
+		setVisible(true);
 	}
 
 	private void initComponents(ActionListener listener) {
@@ -65,12 +71,16 @@ public class FrameMain extends JFrame {
 		buttonLogOut = new BankButtonIcon(new ImageIcon(Constants.createInstance().getProperty(Constants.ICON_LOG_OUT)),
 				listener, Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_LOG_OUT), 45, 30, true);
 
+		buttonBartChart = new BankButtonIcon(new ImageIcon(Constants.ICON_BUTTON_BART_CHART), listener,
+				Constants.createInstance().getProperty(Constants.COMMAND_BUTTON_BART_CHART), 45, 30, true);
+
 		loginPanel = new LoginPanel(listener);
 		panelRegistration = new PanelRegistration(listener);
 		mainPanel = new MainPanel(listener);
 		transferPanel = new TransferPanel(listener);
 		withdrawPanel = new WithdrawPanel(listener);
 		panelShowTransactions = new PanelShowTransactions(listener);
+		depositPanel = new DepositPanel(listener);
 	}
 
 	public void showLoginPanel() {
@@ -81,6 +91,12 @@ public class FrameMain extends JFrame {
 				buttonLogOut.getHeigthButton());
 		add(crossButton);
 		add(loginPanel).setBounds(0, 0, loginPanel.getWidthBackground(), loginPanel.getHeightBackground());
+	}
+	
+	public void showButtonChartPanel() {
+		buttonBartChart.setVisible(true);
+		this.add(buttonBartChart).setBounds(this.getWidth() - buttonBartChart.getWidthButton(), this.getHeight() - buttonBartChart.getHeigthButton(), buttonBartChart.getWidthButton(),
+				buttonBartChart.getHeigthButton());
 	}
 
 	public void showPanelRegistration() {
@@ -114,9 +130,9 @@ public class FrameMain extends JFrame {
 	}
 
 	public void showTransferPanel() {
+		transferPanel.setVisible(true);
 		buttonLogOut.setVisible(true);
 		backButtonOptions.setVisible(true);
-		transferPanel.setVisible(true);
 		buttonLogOut.setBounds(getWidth() - buttonLogOut.getWidthButton(), 0, buttonLogOut.getWidthButton(),
 				buttonLogOut.getHeigthButton());
 		add(buttonLogOut);
@@ -139,6 +155,20 @@ public class FrameMain extends JFrame {
 				backButtonRegister.getWidthButton(), backButtonRegister.getHeightButton());
 		add(backButtonOptions);
 		add(withdrawPanel).setBounds(0, 0, transferPanel.getWidth(), transferPanel.getHeight());
+	}
+
+	public void showDepositPanel() {
+		buttonLogOut.setVisible(true);
+		backButtonOptions.setVisible(true);
+		depositPanel.setVisible(true);
+		buttonLogOut.setBounds(getWidth() - buttonLogOut.getWidthButton(), 0, buttonLogOut.getWidthButton(),
+				buttonLogOut.getHeigthButton());
+		add(buttonLogOut);
+
+		backButtonOptions.setBounds(getWidth() - buttonLogOut.getWidth() - backButtonRegister.getWidthButton(), 0,
+				backButtonRegister.getWidthButton(), backButtonRegister.getHeightButton());
+		add(backButtonOptions);
+		add(depositPanel).setBounds(0, 0, depositPanel.getWidth(), depositPanel.getHeight());
 	}
 
 	public void showPanelShowTransactions() {
@@ -184,10 +214,24 @@ public class FrameMain extends JFrame {
 		backButtonOptions.setVisible(false);
 	}
 
+	public void hideDepositPanel() {
+		depositPanel.setVisible(false);
+		buttonLogOut.setVisible(false);
+		backButtonOptions.setVisible(false);
+	}
+
 	public void hidePanelShowTransactions() {
 		buttonLogOut.setVisible(false);
 		backButtonOptions.setVisible(false);
 		panelShowTransactions.setVisible(false);
+	}
+	
+	public void hideButtonShowBartChart() {
+		buttonBartChart.setVisible(false);
+	}
+
+	public void createBartChartJDialog(int[] values) {
+		bartChartJDialog = new BartChartJDialog(values);
 	}
 
 	public void changeLenguage() {
@@ -195,7 +239,7 @@ public class FrameMain extends JFrame {
 	}
 
 	public String getLenguage() {
-		return this.loginPanel.getLenguage();
+		return loginPanel.getLenguage();
 	}
 
 	public String getUsernameLogin() {
@@ -274,6 +318,32 @@ public class FrameMain extends JFrame {
 		return panelRegistration.getResgitrationId();
 	}
 
+	public String getAmountDeposit() {
+		return depositPanel.getAmount();
+	}
+
+	public String getPasswordDeposit() {
+		return depositPanel.getPassword();
+	}
+
+	public boolean validatePasswordDeposit() {
+		if (getPasswordDeposit().isBlank()) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validateAmountDeposit() {
+		if (getAmountDeposit().isBlank()) {
+			return false;
+		}
+		return true;
+	}
+
+	public void resetInfoDeposit() {
+		depositPanel.resetDepositPanel();
+	}
+
 	public boolean validateRegistrationName() {
 		if (getRegistrationName().isBlank()) {
 			return false;
@@ -308,9 +378,9 @@ public class FrameMain extends JFrame {
 		}
 		return true;
 	}
-	
+
 	public boolean validateRegistrationPassword() {
-		if(getRegistrationPassword().isBlank()) {
+		if (getRegistrationPassword().isBlank()) {
 			return false;
 		}
 		return true;
@@ -322,84 +392,84 @@ public class FrameMain extends JFrame {
 		}
 		return true;
 	}
-	
+
 	public String getTargetAccountTransfer() {
 		return transferPanel.getTargetAccountTransfer();
 	}
-	
+
 	public String getAmountTransfer() {
 		return transferPanel.getAmountTransfer();
 	}
-	
+
 	public String getPasswordTransfer() {
 		return transferPanel.getPasswordTransfer();
 	}
-	
+
 	public boolean validateTargetAccountTransfer() {
-		if(getTargetAccountTransfer().isBlank()) {
+		if (getTargetAccountTransfer().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean validateAmountTransfer() {
-		if(getAmountTransfer().isBlank()) {
+		if (getAmountTransfer().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean validatePasswordTransfer() {
-		if(getPasswordTransfer().isBlank()) {
+		if (getPasswordTransfer().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean validateUsernameLogin() {
-		if(getUsernameLogin().isBlank()) {
+		if (getUsernameLogin().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public boolean validatePasswordLogin() {
-		if(getPasswordLogin().isBlank()) {
+		if (getPasswordLogin().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public String getAmountWithdraw() {
 		return withdrawPanel.getAmountWhitdraw();
 	}
-	
+
 	public boolean validateAmountWithdrawal() {
-		if(getAmountWithdraw().isBlank()) {
+		if (getAmountWithdraw().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public String getPasswordWithdraw() {
 		return withdrawPanel.getPasswordWithdraw();
 	}
-	
+
 	public boolean validatePasswordWithdraw() {
-		if(getPasswordWithdraw().isBlank()) {
+		if (getPasswordWithdraw().isBlank()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public void resetTransferPanel() {
 		transferPanel.resetTransferPanel();
 	}
-	
+
 	public void resetInfoRegistration() {
 		panelRegistration.resetInfoRegistration();
 	}
-	
+
 	public void resetInfoLogin() {
 		loginPanel.resetInfoLogin();
 	}
@@ -407,22 +477,22 @@ public class FrameMain extends JFrame {
 	public void resetInfoWithdrawal() {
 		withdrawPanel.resetInfoWithdrawal();
 	}
-	
+
 	public void setTypeTransaction(String typeTransaction) {
 		panelShowTransactions.setResultTransactionType(typeTransaction);
 	}
-	
+
 	public void setAmountTransaction(String amount) {
 		panelShowTransactions.setResultAmount(amount);
 	}
-	
+
 	public void setDateTransaction(String date) {
 		panelShowTransactions.setResultDate(date);
 	}
-	
+
 	public void showDataErrorBlank() {
-		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.ERROR_DATA_BLANK), Constants.ERROR,
-				JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.ERROR_DATA_BLANK),
+				Constants.ERROR, JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void showDataErrorPasswordLogin() {
@@ -434,29 +504,35 @@ public class FrameMain extends JFrame {
 		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.ERROR_DATA_USERNAME_LOGIN),
 				Constants.ERROR, JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	public void showAccountSuccesfullyCreated() {
-		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.ACCOUNT_SUCCESSFULLY_CREATED),
+		JOptionPane.showMessageDialog(null,
+				Constants.createInstance().getProperty(Constants.ACCOUNT_SUCCESSFULLY_CREATED),
 				Constants.createInstance().getProperty(Constants.INFORMATION), JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void showError(String error) {
-		JOptionPane.showMessageDialog(null, error,
-				Constants.createInstance().getProperty(Constants.INFORMATION), JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, error, Constants.createInstance().getProperty(Constants.INFORMATION),
+				JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void showTransferSuccesfully() {
 		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.TRANSFER_SUCCESSFULLY),
 				Constants.createInstance().getProperty(Constants.INFORMATION), JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void showErrorShowTransactiions() {
 		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.ERROR_TRANSACTIONS),
 				Constants.createInstance().getProperty(Constants.ERROR), JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void showWithdrawSuccesfully() {
 		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.WITHDRAW_SUCCESSFULLY),
+				Constants.createInstance().getProperty(Constants.INFORMATION), JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showDepositSuccessfully() {
+		JOptionPane.showMessageDialog(null, Constants.createInstance().getProperty(Constants.DEPOSIT_SUCCESSFULLY),
 				Constants.createInstance().getProperty(Constants.INFORMATION), JOptionPane.INFORMATION_MESSAGE);
 	}
 }

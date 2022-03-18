@@ -71,4 +71,12 @@ public class Account {
 	public void addTransaction(BankingTransaction transaction) {
 		this.transactions.add(transaction);
 	}
+
+	@Override
+	public String toString() {
+		return "Account [user=" + user + ", numberAccount=" + numberAccount + ", passwordAccount=" + passwordAccount
+				+ ", money=" + money + ", transactions=" + transactions + "]";
+	}
+	
+	
 }
